@@ -1,0 +1,76 @@
+/* General Form Container */
+.add-note-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 50px auto;
+    border-top: 6px solid #28a745; /* Green top border */
+}
+
+/* Form Title */
+.add-note-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Input Fields */
+.add-note-container input[type="text"],
+.add-note-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+.add-note-container input[type="text"]:focus,
+.add-note-container textarea:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.2);
+}
+
+/* Textarea Styling */
+.add-note-container textarea {
+    height: 200px;
+    resize: none;
+}
+
+/* Buttons */
+.add-note-container button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.add-note-container .btn-save {
+    background-color: #28a745;
+    color: white;
+    margin-right: 10px;
+}
+
+.add-note-container .btn-save:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.add-note-container .btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+.add-note-container .btn-cancel:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}

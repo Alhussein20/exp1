@@ -1,0 +1,46 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Link the custom CSS -->
+<link rel="stylesheet" href="{% static 'Notes/register.css' %}">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-header">
+                    <h4>Create Your Account</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" id="registerForm">
+                        {% csrf_token %}
+                        <div class="mb-2">
+                            <label for="id_username" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control form-control-sm" id="id_username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="id_email" class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control form-control-sm" id="id_email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="id_password1" class="form-label">Password</label>
+                            <input type="password" name="password1" class="form-control form-control-sm" id="id_password1" placeholder="Create a password" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="id_password2" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" class="form-control form-control-sm" id="id_password2" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm w-100">Register</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-2">
+                    <p class="mb-0 small">Already have an account? <a href="{% url 'login' %}" class="text-success fw-bold">Login here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

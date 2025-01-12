@@ -1,0 +1,125 @@
+{% extends "notes/base.html" %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'notes/home.css' %}">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Personal Notes Application</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'profile' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light">Profile</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">My Notes</h2>
+
+    <!-- Add Note Button -->
+    <a href="{% url 'add_note' %}" class="btn btn-success mb-3">+ Add Note</a>
+
+    <!-- Search Bar -->
+    <form method="GET" action="" class="d-flex mb-4">
+        <input type="text" name="q" class="form-control me-2" placeholder="Search notes..." value="{{ request.GET.q }}">
+        <button type="submit" class="btn btn-outline-success me-2">Search</button>
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary">Clear</a>
+    </form>
+
+    <!-- Notes List -->
+    <div class="row">
+        {% for note in notes %}
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ note.title }}</h5>
+                        <p class="card-text">{{ note.description }}</p>
+                        <small class="text-muted">Created on: {{ note.created_at|date:"F j, Y \a\t g:i A" }}</small>
+                        <div class="mt-2">
+                            <!-- Edit Button -->
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ note.id }}">Edit</button>
+                            <!-- Delete Button -->
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ note.id }}">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editModal{{ note.id }}" tabindex="-1" aria-labelledby="editModalLabel{{ note.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" action="{% url 'edit_note' note.id %}">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Note</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" name="title" class="form-control mb-2" value="{{ note.title }}" required>
+                                <textarea name="description" class="form-control" rows="4" required>{{ note.description }}</textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal{{ note.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ note.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" action="{% url 'delete_note' note.id %}">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete Note</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete "<strong>{{ note.title }}</strong>"?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        {% empty %}
+            <p>No notes found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

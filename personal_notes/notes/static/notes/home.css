@@ -1,0 +1,121 @@
+/* General Page Styling */
+body {
+    background: linear-gradient(to right, #575758, #9199a0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #18191a;
+    padding: 1rem 2rem;
+}
+
+.navbar a {
+    color: #f0ecec;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+
+/* Add Note Button */
+.add-note-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-note-btn:hover {
+    background-color: #0a0e0b;
+}
+
+/* Notes Card Styling */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body h5 {
+    font-weight: bold;
+}
+
+.card-body p {
+    color: #6c757d;
+}
+
+/* Edit and Delete Buttons */
+.btn-edit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* Search Bar */
+.search-bar input[type="text"] {
+    background-color: #070808;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #f3ebeb;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Search and Clear Buttons */
+button.btn-outline-success {
+    background-color: #589758;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #1e7e34;
+    border-radius: 25px;
+    margin-left: 10px;
+}
+
+button.btn-outline-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+a.btn-outline-secondary {
+    background-color: #589758;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #1e7e34;
+    border-radius: 25px;
+    margin-left: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a.btn-outline-secondary:hover {
+    background-color: #1e7e34;
+    transform: scale(1.05);
+}
